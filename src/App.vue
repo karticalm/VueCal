@@ -10,7 +10,9 @@
         <button class="button l" @click="backspace()"><span class="material-symbols-outlined">
             backspace
           </span></button>
-        <button class="button l"> % </button>
+        <button class="button"><span class="material-symbols-outlined">
+            light_mode
+          </span></button>
         <button class="button l" @click="calInput('/')"> / </button>
       </div>
       <div class="cal-button-row">
@@ -51,6 +53,7 @@ export default {
       result: '',
       typed: '0',
       operation: '',
+      evalOperation: '',
       history: []
     };
   },
@@ -58,15 +61,22 @@ export default {
     calInput(x) {
       if (x == '+' || x == '-' || x == '*' || x == '/') {
         this.operation += x;
+        if (this.operation.length >= 2) {
+          let lastChar = this.operation.slice(-2, -1);
+          if (lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/') {
+            this.operation = this.operation.slice(0, -1);
+          }
+        }
         this.typed = '0';
-        this.evaluate();
-      } else if (this.typed == '0') {
-        this.typed = '';
-        this.typed += x;
-        this.operation += x;
-      } else {
-        this.typed += x;
-        this.operation += x;
+      } else if (this.typed.length <= 8 && this.operation.length <= 24) {
+        if (this.typed == '0') {
+          this.typed = '';
+          this.typed += x;
+          this.operation += x;
+        } else {
+          this.typed += x;
+          this.operation += x;
+        }
       }
     },
     clearScreen() {
@@ -82,10 +92,16 @@ export default {
       }
     },
     evaluate() {
-      this.result = eval(this.operation);
-      this.operation = JSON.stringify(this.result);
+      let lastChar = this.operation.slice(-1);
+      if (lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/') {
+        this.evalOperation = this.operation.slice(0, -1);
+        this.result = eval(this.evalOperation);
+      } else {
+        this.result = eval(this.operation);
+      }
+      this.operation = '';
       this.typed = this.result;
-    }
+    },
   },
   computed: {
     operationDisp() {
@@ -99,6 +115,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0');
 
 * {
   box-sizing: border-box;
