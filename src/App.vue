@@ -1,43 +1,43 @@
 <template>
   <div class="container">
-    <div class="calc-body">
-      <div class="calc-screen">
-        <div class="calc-typed">200</div>
-        <div class="calc-operation">100+100</div>
+    <div class="cal-body">
+      <div class="cal-screen">
+        <div class="cal-typed">{{ typed }}</div>
+        <div class="cal-operation">{{ operationDisp }}</div>
       </div>
-      <div class="calc-button-row">
-        <div class="button l"> C </div>
-        <div class="button l"><span class="material-symbols-outlined">
+      <div class="cal-button-row">
+        <button class="button l" @click="clearScreen()"> C </button>
+        <button class="button l" @click="backspace()"><span class="material-symbols-outlined">
             backspace
-          </span></div>
-        <div class="button l"> % </div>
-        <div class="button l"> / </div>
+          </span></button>
+        <button class="button l"> % </button>
+        <button class="button l" @click="calInput('/')"> / </button>
       </div>
-      <div class="calc-button-row">
-        <div class="button"> 7 </div>
-        <div class="button"> 8 </div>
-        <div class="button"> 9 </div>
-        <div class="button l"> x </div>
+      <div class="cal-button-row">
+        <button class="button" @click="calInput('7')"> 7 </button>
+        <button class="button" @click="calInput('8')"> 8 </button>
+        <button class="button" @click="calInput('9')"> 9 </button>
+        <button class="button l" @click="calInput('*')"> x </button>
       </div>
-      <div class="calc-button-row">
-        <div class="button"> 4 </div>
-        <div class="button"> 5 </div>
-        <div class="button"> 6 </div>
-        <div class="button l"> - </div>
+      <div class="cal-button-row">
+        <button class="button" @click="calInput('4')"> 4 </button>
+        <button class="button" @click="calInput('5')"> 5 </button>
+        <button class="button" @click="calInput('6')"> 6 </button>
+        <button class="button l" @click="calInput('-')"> - </button>
       </div>
-      <div class="calc-button-row">
-        <div class="button"> 1 </div>
-        <div class="button"> 2 </div>
-        <div class="button"> 3 </div>
-        <div class="button l"> + </div>
+      <div class="cal-button-row">
+        <button class="button" @click="calInput('1')"> 1 </button>
+        <button class="button" @click="calInput('2')"> 2 </button>
+        <button class="button" @click="calInput('3')"> 3 </button>
+        <button class="button l" @click="calInput('+')"> + </button>
       </div>
-      <div class="calc-button-row b">
-        <div class="button"> . </div>
-        <div class="button"> 0 </div>
-        <div class="button h"><span class="material-symbols-outlined">
+      <div class="cal-button-row b">
+        <button class="button" @click="calInput('.')"> . </button>
+        <button class="button" @click="calInput('0')"> 0 </button>
+        <button class="button h"><span class="material-symbols-outlined">
             history
-          </span></div>
-        <div class="button r"> = </div>
+          </span></button>
+        <button class="button r" @click="evaluate()"> = </button>
       </div>
     </div>
   </div>
@@ -48,18 +48,48 @@ export default {
   name: "App",
   data() {
     return {
-      firstName: "Kartik",
-      lastname: "Pardhi",
+      result: '',
+      typed: '0',
+      operation: '',
+      history: []
     };
   },
   methods: {
-    changeName(newName) {
-      this.name = newName;
+    calInput(x) {
+      if (x == '+' || x == '-' || x == '*' || x == '/') {
+        this.operation += x;
+        this.typed = '0';
+        this.evaluate();
+      } else if (this.typed == '0') {
+        this.typed = '';
+        this.typed += x;
+        this.operation += x;
+      } else {
+        this.typed += x;
+        this.operation += x;
+      }
     },
+    clearScreen() {
+      this.typed = '0';
+      this.operation = '';
+      this.result = '';
+    },
+    backspace() {
+      this.typed = this.typed.slice(0, -1);
+      if (this.typed == '') {
+        this.typed = '0';
+        this.operation = this.operation.slice(0, -1);
+      }
+    },
+    evaluate() {
+      this.result = eval(this.operation);
+      this.operation = JSON.stringify(this.result);
+      this.typed = this.result;
+    }
   },
   computed: {
-    fullName() {
-      return `${this.firstName} ${this.lastname}`;
+    operationDisp() {
+      return this.operation;
     },
   },
 };
@@ -81,7 +111,7 @@ export default {
   color: black;
 }
 
-.calc-body {
+.cal-body {
   width: 275px;
   margin: auto;
   min-height: 400px;
@@ -90,7 +120,7 @@ export default {
   box-shadow: 0 8px 50px -7px black;
 }
 
-.calc-screen {
+.cal-screen {
   background: #3A4655;
   width: 100%;
   height: 150px;
@@ -99,7 +129,7 @@ export default {
   border-top-right-radius: 10px;
 }
 
-.calc-operation {
+.cal-operation {
   text-align: right;
   color: #727B86;
   font-size: 15px;
@@ -108,19 +138,19 @@ export default {
   margin-top: 20px;
 }
 
-.calc-typed {
+.cal-typed {
   margin-top: 20px;
   font-size: 45px;
   text-align: right;
   color: #fff;
 }
 
-.calc-button-row {
+.cal-button-row {
   width: 100%;
   background: #3C4857;
 }
 
-.calc-button-row.b {
+.cal-button-row.b {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -220,12 +250,5 @@ input[type=text] {
   font-size: 60px;
   line-height: 60px;
   margin: 0 25px;
-}
-
-.calculator {
-  background-color: #c0c0c0;
-  box-shadow: 0px 0px 0px 10px #666;
-  border: 5px solid black;
-  border-radius: 10px;
 }
 </style>
