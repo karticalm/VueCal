@@ -78,7 +78,7 @@ export default {
           }
         }
         this.typed = '0';
-      } else if (this.typed.length <= 8 && this.operation.length <= 24) {
+      } else if (this.typed.length < 8 && this.operation.length <= 24) {
         if (this.typed == '0') {
           this.typed = '';
           this.typed += x;
@@ -213,6 +213,8 @@ export default {
   font-size: 45px;
   text-align: right;
   color: #E3E2E2;
+  resize: both;
+  overflow: auto;
 }
 
 .light-cal-typed {
@@ -220,6 +222,8 @@ export default {
   font-size: 45px;
   text-align: right;
   color: #425062;
+  resize: both;
+  overflow: auto;
 }
 
 .cal-button-row {
