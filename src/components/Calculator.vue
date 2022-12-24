@@ -1,46 +1,46 @@
 <template>
   <div class="home">
     <div class="container">
-      <div class="cal-body">
-        <div class="cal-screen">
-          <div class="cal-typed">{{ typed }}</div>
-          <div class="cal-operation">{{ operationDisp }}</div>
+      <div :class="[modeToggle ? 'cal-body':'light-cal-body']">
+        <div :class="[modeToggle ? 'cal-screen':'light-cal-screen']">
+          <div :class="[modeToggle ? 'cal-typed':'light-cal-typed']">{{ typed }}</div>
+          <div :class="[modeToggle ? 'cal-operation':'light-cal-operation']">{{ operationDisp }}</div>
         </div>
-        <div class="cal-button-row">
-          <button class="button l" @click="clearScreen()"> C </button>
-          <button class="button l" @click="backspace()"><span class="material-symbols-outlined">
+        <div :class="[modeToggle ? 'cal-button-row':'light-cal-button-row']">
+          <button :class="[modeToggle ? 'button l':'light-button l']" @click="clearScreen()"> C </button>
+          <button :class="[modeToggle ? 'button l':'light-button l']" @click="backspace()"><span class="material-symbols-outlined">
               backspace
             </span></button>
-          <button class="button"><span class="material-symbols-outlined">
+          <button :class="[modeToggle ? 'button':'light-button']" @click="modeToggleFunc()"><span class="material-symbols-outlined">
               light_mode
             </span></button>
-          <button class="button l" @click="calInput('/')"> / </button>
+          <button :class="[modeToggle ? 'button l':'light-button l']" @click="calInput('/')"> / </button>
         </div>
-        <div class="cal-button-row">
-          <button class="button" @click="calInput('7')"> 7 </button>
-          <button class="button" @click="calInput('8')"> 8 </button>
-          <button class="button" @click="calInput('9')"> 9 </button>
-          <button class="button l" @click="calInput('*')"> x </button>
+        <div :class="[modeToggle ? 'cal-button-row':'light-cal-button-row']">
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('7')"> 7 </button>
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('8')"> 8 </button>
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('9')"> 9 </button>
+          <button :class="[modeToggle ? 'button l':'light-button l']" @click="calInput('*')"> x </button>
         </div>
-        <div class="cal-button-row">
-          <button class="button" @click="calInput('4')"> 4 </button>
-          <button class="button" @click="calInput('5')"> 5 </button>
-          <button class="button" @click="calInput('6')"> 6 </button>
-          <button class="button l" @click="calInput('-')"> - </button>
+        <div :class="[modeToggle ? 'cal-button-row':'light-cal-button-row']">
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('4')"> 4 </button>
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('5')"> 5 </button>
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('6')"> 6 </button>
+          <button :class="[modeToggle ? 'button l':'light-button l']" @click="calInput('-')"> - </button>
         </div>
-        <div class="cal-button-row">
-          <button class="button" @click="calInput('1')"> 1 </button>
-          <button class="button" @click="calInput('2')"> 2 </button>
-          <button class="button" @click="calInput('3')"> 3 </button>
-          <button class="button l" @click="calInput('+')"> + </button>
+        <div :class="[modeToggle ? 'cal-button-row':'light-cal-button-row']">
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('1')"> 1 </button>
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('2')"> 2 </button>
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('3')"> 3 </button>
+          <button :class="[modeToggle ? 'button l':'light-button l']" @click="calInput('+')"> + </button>
         </div>
-        <div class="cal-button-row b">
-          <button class="button" @click="calInput('.')"> . </button>
-          <button class="button" @click="calInput('0')"> 0 </button>
-          <button class="button" @click="historyNav()"><span class="material-symbols-outlined">
+        <div :class="[modeToggle ? 'cal-button-row b':'light-cal-button-row b']">
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('.')"> . </button>
+          <button :class="[modeToggle ? 'button':'light-button']" @click="calInput('0')"> 0 </button>
+          <button :class="[modeToggle ? 'button':'light-button']" @click="historyNav()"><span class="material-symbols-outlined">
               history
             </span></button>
-          <button class="button r" @click="evaluate()"> = </button>
+          <button :class="[modeToggle ? 'button r':'light-button r']" @click="evaluate()"> = </button>
         </div>
       </div>
     </div>
@@ -57,11 +57,17 @@ export default {
       typed: '0',
       operation: '',
       evalOperation: '',
+      modeToggle: true,
      };
   },
   methods: {
 
     ...mapActions(['addOperationAction']),
+
+    modeToggleFunc() {
+      this.modeToggle = !this.modeToggle;
+      console.log(this.modeToggle)
+    },
 
     calInput(x) {
       if (x == '+' || x == '-' || x == '*' || x == '/') {
@@ -155,13 +161,31 @@ export default {
   width: 275px;
   margin: auto;
   min-height: 400px;
-  border: solid 1px #3A4655;
+  border: solid 1px #425062;
+  border-radius: 10px;
+  box-shadow: 0 8px 50px -7px black;
+}
+
+.light-cal-body {
+  width: 275px;
+  margin: auto;
+  min-height: 400px;
+  border: solid 1px #E3E2E2;
   border-radius: 10px;
   box-shadow: 0 8px 50px -7px black;
 }
 
 .cal-screen {
-  background: #3A4655;
+  background: #425062;
+  width: 100%;
+  height: 150px;
+  padding: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.light-cal-screen {
+  background: #E3E2E2;
   width: 100%;
   height: 150px;
   padding: 20px;
@@ -171,7 +195,16 @@ export default {
 
 .cal-operation {
   text-align: right;
-  color: #727B86;
+  color: #425062;
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 5px;
+  margin-top: 20px;
+}
+
+.light-cal-operation {
+  text-align: right;
+  color: #E3E2E2;
   font-size: 15px;
   font-weight: bold;
   padding-top: 5px;
@@ -182,15 +215,32 @@ export default {
   margin-top: 20px;
   font-size: 45px;
   text-align: right;
-  color: #fff;
+  color: #E3E2E2;
+}
+
+.light-cal-typed {
+  margin-top: 20px;
+  font-size: 45px;
+  text-align: right;
+  color: #425062;
 }
 
 .cal-button-row {
   width: 100%;
-  background: #3C4857;
+  background: #425062;
+}
+
+.light-cal-button-row {
+  width: 100%;
+  background: #E3E2E2;
 }
 
 .cal-button-row.b {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.light-cal-button-row.b {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -210,13 +260,38 @@ export default {
   transition: all 0.2s ease-in-out;
 }
 
+.light-button {
+  width: 25%;
+  background: #E3E2E2;
+  color: #425062;
+  padding: 20px;
+  display: inline-block;
+  font-size: 25px;
+  text-align: center;
+  vertical-align: middle;
+  border-right: solid 2px #E3E2E2;
+  border-bottom: solid 2px #E3E2E2;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
 .button.l {
   color: #EC9027;
   background: #404D5E;
 }
 
+.light-button.l {
+  color: #404D5E;
+  background: #E3E2E2;
+}
+
 .button.r {
   color: #E3E2E2;
+  background: #EC9027;
+}
+
+.light-button.r {
+  color: #404D5E;
   background: #EC9027;
 }
 
@@ -225,9 +300,29 @@ export default {
   background: #E3E2E2;
 }
 
+.light-button:hover {
+  color: #E3E2E2;
+  background: #404D5E;
+}
+
 .button.l:hover {
   background: #EC9027;
   color: #404D5E;
+}
+
+.light-button.l:hover {
+  color: #E3E2E2;
+  background: #404D5E;
+}
+
+.button.r:hover {
+  background: #EC9027;
+  color: #404D5E;
+}
+
+.light-button.r:hover {
+  color: #E3E2E2;
+  background: #404D5E;
 }
 
 .material-icons-outlined {
