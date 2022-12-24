@@ -117,8 +117,8 @@ export default {
         const fullOperation = `${this.operation}=${this.result}`;
         this.addOperationAction(fullOperation);
       }
-      this.operation = '';
       this.typed = this.result;
+      this.operation = this.result;
       } else {this.typed = 'Select Operation'}
     },
 
@@ -209,7 +209,7 @@ export default {
 }
 
 .cal-typed {
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 45px;
   text-align: right;
   color: #E3E2E2;
@@ -217,7 +217,7 @@ export default {
 }
 
 .light-cal-typed {
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 45px;
   text-align: right;
   color: #425062;

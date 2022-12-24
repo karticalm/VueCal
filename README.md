@@ -9,4 +9,4 @@ How to deploy it locally
 - Type 'npm run serve'
 - and voila the app is running on localhost
 
-
+Upcoming - CSS enhancements
