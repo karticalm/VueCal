@@ -66,7 +66,6 @@ export default {
 
     modeToggleFunc() {
       this.modeToggle = !this.modeToggle;
-      console.log(this.modeToggle)
     },
 
     calInput(x) {
