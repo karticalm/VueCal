@@ -213,7 +213,6 @@ export default {
   font-size: 45px;
   text-align: right;
   color: #E3E2E2;
-  resize: both;
   overflow: auto;
 }
 
@@ -222,7 +221,6 @@ export default {
   font-size: 45px;
   text-align: right;
   color: #425062;
-  resize: both;
   overflow: auto;
 }
 
