@@ -194,18 +194,16 @@ export default {
 
 .cal-operation {
   text-align: right;
-  color: #425062;
+  color: #E3E2E2;
   font-size: 15px;
-  font-weight: bold;
   padding-top: 5px;
   margin-top: 20px;
 }
 
 .light-cal-operation {
   text-align: right;
-  color: #E3E2E2;
+  color: #425062;
   font-size: 15px;
-  font-weight: bold;
   padding-top: 5px;
   margin-top: 20px;
 }
@@ -321,7 +319,7 @@ export default {
 
 .light-button.r:hover {
   color: #E3E2E2;
-  background: #404D5E;
+  background: #EC9027;
 }
 
 .material-icons-outlined {
