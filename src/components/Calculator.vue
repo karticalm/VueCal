@@ -353,37 +353,4 @@ html {
   font-family: 'Montserrat', sans-serif;
 }
 
-input[type=button] {
-  width: 60px;
-  height: 60px;
-  float: left;
-  padding: 0;
-  margin: 5px;
-  box-sizing: border-box;
-  background: #ecedef;
-  border: none;
-  font-size: 30px;
-  line-height: 30px;
-  border-radius: 50%;
-  font-weight: 700;
-  color: #5E5858;
-  cursor: pointer;
-}
-
-input[type=text] {
-  width: 270px;
-  height: 60px;
-  float: left;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
-  background: none;
-  color: red;
-  text-align: right;
-  font-weight: 700;
-  font-size: 60px;
-  line-height: 60px;
-  margin: 0 25px;
-}
-
 </style>
